@@ -1,0 +1,10 @@
+{
+	"name": "asadatalakeduatlhp",
+	"properties": {
+		"annotations": [],
+		"type": "AzureBlobFS",
+		"typeProperties": {
+			"url": "https://asadatalakeduatlhp.dfs.core.windows.net/"
+		}
+	}
+}
