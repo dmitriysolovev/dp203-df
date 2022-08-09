@@ -1,0 +1,9 @@
+{
+	"name": "dp-203-aug2022-df",
+	"location": "northeurope",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "37b844c0-4346-42b6-ac64-dca09f737542",
+		"tenantId": "408b6bb7-7c31-484b-8f9c-511d643369fe"
+	}
+}
