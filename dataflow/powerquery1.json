@@ -13,7 +13,7 @@
 					}
 				}
 			],
-			"script": "section Section1;\r\nshared Campaigns = let AdfDoc = AzureStorage.DataLakeContents(\"https://asadatalakeduatlhp.dfs.core.windows.net/wwi-02/campaign-analytics/campaignanalytics.csv\"),Csv = Csv.Document(AdfDoc, [Delimiter = \",\", Encoding = TextEncoding.Utf8, QuoteStyle = QuoteStyle.Csv]) in Csv;\r\nshared UserQuery = let Source = #\"Campaigns\" in Source;\r\n",
+			"script": "section Section1;\r\nshared Campaigns = let AdfDoc = AzureStorage.DataLakeContents(\"https://asadatalakeduatlhp.dfs.core.windows.net/wwi-02/campaign-analytics/campaignanalytics.csv\"),Csv = Csv.Document(AdfDoc, [Delimiter = \",\", Encoding = TextEncoding.Utf8, QuoteStyle = QuoteStyle.Csv]) in Csv;\r\nshared UserQuery = let Source = #\"Campaigns\",\r\n  #\"Removed top rows\" = Table.Skip(Source, 1),\r\n  #\"Replaced value\" = Table.ReplaceValue(#\"Removed top rows\", \"\\\", \"\", Replacer.ReplaceText, {\"Column5\", \"Column7\"}),\r\n  #\"Merged columns\" = Table.CombineColumns(#\"Replaced value\", {\"Column5\", \"Column6\"}, Combiner.CombineTextByDelimiter(\"\", QuoteStyle.None), \"Revenue\"),\r\n  #\"Merged columns 1\" = Table.CombineColumns(#\"Merged columns\", {\"Column7\", \"Column8\"}, Combiner.CombineTextByDelimiter(\"\", QuoteStyle.None), \"TargetRevenue\"),\r\n  #\"Changed column type\" = Table.TransformColumnTypes(#\"Merged columns 1\", {{\"Revenue\", Currency.Type}, {\"TargetRevenue\", Currency.Type}}),\r\n  #\"Renamed columns\" = Table.RenameColumns(#\"Changed column type\", {{\"Column1\", \"Region\"}, {\"Column2\", \"Country\"}, {\"Column3\", \"Category\"}, {\"Column4\", \"Campaign_Name\"}}) in #\"Renamed columns\";\r\n",
 			"documentLocale": "en-us"
 		}
 	}
