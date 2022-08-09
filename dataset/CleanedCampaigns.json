@@ -1,0 +1,23 @@
+{
+	"name": "CleanedCampaigns",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "asadatalakeduatlhp",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "campoutput.csv",
+				"fileSystem": "df-output"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}
